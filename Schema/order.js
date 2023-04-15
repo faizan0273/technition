@@ -20,6 +20,10 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  username: {
+    type: String,
+    required: true
+  },
   day: {
     type: String,
     required: true
@@ -33,7 +37,7 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   amount: {
-    type: Number,
+    type: String,
     required: true
   },
   status: {
@@ -41,16 +45,13 @@ const orderSchema = new mongoose.Schema({
     enum: ['New', 'In Progress', 'Completed','Cancelled'],
     default: 'New'
   },
-  customerLocation: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
+  lat:{
+    type: String,
+    required: true
+  },
+  lon:{
+    type: String,
+    required: true
   },
   timestamp: {
     type: Date,

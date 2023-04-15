@@ -445,7 +445,7 @@ app.put('/updateseller/:sellerId',sellerAuthMiddleware, async (req, res) => {
       const sellerId = req.params.sellerId;
   
       // Find all transactions of the seller by querying the Transaction model
-      const transactions = await Transaction.find({ seller: sellerId });
+      const transactions = await Transaction.find({ seller: sellerId }).select('-__v -updatedAt ');
   
       // Return the transactions as a response
       res.status(200).json({message:transactions});
@@ -777,10 +777,11 @@ app.put('/updateCustomer/:userId', async (req, res) => {
 
 
   app.post('/orders', async (req, res) => {
-    const { userId, sellerId, type, date, day, time, image, amount, status, customerLocation } = req.body;
+    const { username,userId, sellerId, type, date, day, time, image, amount, status, lat,lon } = req.body;
   
     try {
       const order = new Order({
+        username,
         userId,
         sellerId,
         type,
@@ -790,7 +791,8 @@ app.put('/updateCustomer/:userId', async (req, res) => {
         image,
         amount,
         status,
-        customerLocation,
+        lat,
+        lon,
         timestamp: Date.now()
       });
       await order.save();
