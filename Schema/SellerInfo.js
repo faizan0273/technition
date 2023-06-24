@@ -10,11 +10,6 @@ const sellerinfo = new mongo.Schema({
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   password: {
     type: String,
     required: true,
@@ -33,12 +28,16 @@ const sellerinfo = new mongo.Schema({
   },
   type : {
     type :String,
-    enum:['Electric','Plumber','Cooling','Heater'],
-    required : false
+    enum:['Electric+Heater','Plumber','Cooling'],
+    required : true
   },
   token: {
     type: String,
     // required : true
+  },
+  imagename: {
+    type: String,
+    required : true
   },
   passportDocument: {
     type: Buffer,
@@ -52,10 +51,26 @@ const sellerinfo = new mongo.Schema({
     type: Buffer,
     // required : true
   },
-  storedCode: { type: Number }
+  storedCode: { type: Number },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  earnings: {
+    type: Number,
+    default: 0,
+  },
 }, {
   timestamps: true,
 });
+
+sellerinfo.methods.updateRating = function(rating) {
+  const numRatings = this.orders.length;
+  const currentRating = this.rating;
+  const newRating = (currentRating * numRatings + rating) / (numRatings + 1);
+  this.rating = newRating;
+  return this.save();
+};
 
 const Seller = mongo.model("sellerinfo", sellerinfo);
 

@@ -8,12 +8,19 @@ const orderSchema = new mongoose.Schema({
   },
   sellerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Seller',
+    ref: 'sellerinfo',
     required: true
   },
   type: {
     type: String,
-    enum: ['Electric', 'Plumber', 'Cooling', 'Heater'],
+    required: true
+  },
+  latitude: {
+    type: String,
+    required: true
+  },
+  longitude: {
+    type: String,
     required: true
   },
   date: {
@@ -45,13 +52,12 @@ const orderSchema = new mongoose.Schema({
     enum: ['New', 'In Progress', 'Completed','Cancelled'],
     default: 'New'
   },
-  lat:{
+  address:{
     type: String,
     required: true
   },
-  lon:{
+    updatedAmount:{
     type: String,
-    required: true
   },
   timestamp: {
     type: Date,

@@ -10,7 +10,7 @@ const transactionSchema = new mongoose.Schema({
       type: Number,
       required: true
     },
-    method: {
+    method: { 
       type: String,
       enum: ['bank', 'mobile'],
       required: true
