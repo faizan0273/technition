@@ -25,6 +25,11 @@ const userInfo  = new mongoose.Schema({
         type: String,
         required: false,
       },
+      access: {
+        type: String,
+        enum: ['Accepted', 'Denied'],
+        default : "Accepted"
+      },  
       idofiqama: {
         type: String,
         required: false,

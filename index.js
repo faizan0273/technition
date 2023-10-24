@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
@@ -37,11 +37,13 @@ const Wallet = require("./Schema/wallet");
 const Transaction = require("./Schema/transaction");
 const Transactionu = require("./Schema/userTransactions");
 const cors = require("cors");
+const router = require("./Admin/adminRouter")
 const http = require('http').createServer(app);
 const { Server } = require("socket.io");
 const fs = require('fs');
 app.use(cors());
 app.use('/uploads', express.static('/app/uploads'));
+app.use(router)
 
 // start the server
 const port =  process.env.PORT || 8000;
@@ -55,10 +57,21 @@ const io = new Server(http, {
   },
 });
 
-//Connect to Database
-mongoose.connect('mongodb+srv://doadmin:50Iv41Ky9tFr73P6@db-mongodb-tor1-59054-b37462cf.mongo.ondigitalocean.com/admin?authSource=admin&tls=true', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+const mongoURI = 'mongodb+srv://faizan:4yfuyMYr7sk7EJwz@cluster0.lprxxnp.mongodb.net/technician';
+
+// Extract the database name from the URI
+
+
+// Connect to MongoDB
+mongoose
+  .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB:');
+
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 
   app.get('/', function (req, res) {
@@ -293,7 +306,7 @@ app.post("/signup", async (req, res) => {
   }
 
   // Hash the password before storing in the database
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     const seller = new Seller({
@@ -333,6 +346,8 @@ app.post("/login", async (req, res) => {
         message: "Invalid email or password",
       });
     }
+    if(seller.access === "Accepted"){
+      
 
     const user_ = await Seller.findOne({ phonenumber, token: { $ne: null } });
     if (user_) {
@@ -340,7 +355,7 @@ app.post("/login", async (req, res) => {
     }
 
     // Compare the password provided with the hashed password stored in the database
-    const passwordMatch = await bcrypt.compare(password, seller.password);
+    // const passwordMatch = await bcrypt.compare(password, seller.password);
 
     if (!passwordMatch) {
       return res.status(401).json({
@@ -357,6 +372,12 @@ app.post("/login", async (req, res) => {
       id: seller._id,
       token: token
     });
+  }else{
+    return res.status(401).json({
+      message: "Your Account is blocked you cannot login",
+    });
+  }
+
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -455,7 +476,7 @@ app.post('/forgot-passwordc/email', async (req, res) => {
           return res.status(400).json({message:'User not found'});
         }
         // update password in database
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        // const hashedPassword = await bcrypt.hash(newPassword, 10);
         await Seller.findOneAndUpdate({ email }, { password: hashedPassword }, { upsert: true });  
         return res.status(200).json({message:'Password updated'});
       } catch (err) {
@@ -779,8 +800,9 @@ app.post('/costumersignup', async (req, res) => {
         return res.status(409).json({ message: 'User already exists' });
       }
   
+
       // Hash the password
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      // const hashedPassword = await bcrypt.hash(req.body.password, 10);
   
       // Create the user
       const user = new User({
@@ -810,12 +832,13 @@ app.post('/costumersignup', async (req, res) => {
       }
 
       const user_ = await User.findOne({ email, token: { $ne: null } });
+      if(seller.access === "Accepted"){
       if (user_) {
         return res.status(400).json({ message: 'User is already logged in' });
       }
   
       // Check password
-      const validPassword = await bcrypt.compare(req.body.password, user.password);
+      // const validPassword = await bcrypt.compare(req.body.password, user.password);
       if (!validPassword) {
         return res.status(401).json({ message: 'Invalid Password' });
       }
@@ -825,6 +848,9 @@ app.post('/costumersignup', async (req, res) => {
       user.token = token;
       await user.save();
       res.json({ message: 'Authentication successful', token: token ,id : user._id});
+    }else{
+      return res.status(401).json({ message: 'Your Account is blocked you cannot login' });
+    }
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal server error' });
@@ -942,7 +968,7 @@ app.get('/customer/:userId', async (req, res) => {
           return res.status(400).json({message:'User not found'});
         }
         // update password in database
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        // const hashedPassword = await bcrypt.hash(newPassword, 10);
         await User.findOneAndUpdate({ email }, { password: hashedPassword }, { upsert: true });  
         return res.status(200).json({message:'Password updated'});
       } catch (err) {

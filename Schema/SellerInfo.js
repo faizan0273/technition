@@ -31,13 +31,18 @@ const sellerinfo = new mongo.Schema({
     enum:['Electric+Heater','Plumber','Cooling'],
     required : true
   },
+  access: {
+    type: String,
+    enum: ['Accepted', 'Denied'],
+    default : "Accepted"
+  },  
   token: {
     type: String,
     // required : true
   },
   imagename: {
     type: String,
-    required : true
+    // required : true
   },
   passportDocument: {
     type: Buffer,
