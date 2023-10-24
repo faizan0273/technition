@@ -52,7 +52,7 @@ http.listen(port, () => {
 });
 const io = new Server(http, {
   cors: {
-    origin: "https://dolphin-app-ldyyx.ondigitalocean.app/",
+    origin: "https://clownfish-app-mo7d6.ondigitalocean.app/",
     credentials: true,
   },
 });
