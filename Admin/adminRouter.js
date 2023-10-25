@@ -7,7 +7,7 @@ router.post('/adminSignUp' , adminController.adminSignUp);
 
 router.post('/adminLogin' , adminController.adminlogin);
 
-router.post('/updateAdmin/:' , adminController.updateAdmin);
+router.post('/updateAdmin/:adminId' , adminController.updateAdmin);
 
 router.get('/getAllOrders' , adminController.getAllOrders);
 
