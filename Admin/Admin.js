@@ -34,11 +34,11 @@ const adminController = {
       },
 
      async updateAdmin(req,res){
-        const userId = req.params.userId;
+        const adminId = req.params.adminId;
         try {
           // Update Personal Info
           if (req.body.name || req.body.email || req.body.password  ) {
-            await adminInfo.updateOne({ _id:userId }, { $set: req.body });
+            await adminInfo.updateOne({ _id:adminId }, { $set: req.body });
           }
       
           res.status(200).json({ success: true, message: 'seller information updated successfully' });
