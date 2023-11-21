@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "1eaf9970-ab5f-41d6-8feb-9a36795473d7",
+		"name": "Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"firstname\": \"Muhammad\",\n        \"lastname\": \"Faizan\",\n        \"email\": \"immuhammadfaizan@gmail.com\",\n        \"password\": \"xxxxxxxx\",\n        \"phonenumber\": \"03084671840\",\n        \"city\": \"Lahore\",\n        \"dateofbirth\": \"02-04-2000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/costumersignup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"costumersignup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Costumer SignIn",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"email\": \"immuhammadfaizan@gmail.com\",\n        \"password\": \"xxxxxxxx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/costumersignin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"costumersignin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"immuhammadfaizan@gmail.com\",\n    \"code\":\"7238\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-password/code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-password",
+						"code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get customer info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/customer/64389b6332f1c46c208d1802",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"customer",
+						"64389b6332f1c46c208d1802"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update new Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"immuhammadfaizan@gmail.com\",\n    \"newPassword\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-password/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-password",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "code send to email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"immuhammadfaizan@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-password/email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-password",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\":\"64389df45e5df419f2d92ee5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/customer/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"customer",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"immuhammadfaizan@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/updateCustomer/64389df45e5df419f2d92ee5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"updateCustomer",
+						"64389df45e5df419f2d92ee5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sellers by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/sellers/Cooling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"sellers",
+						"Cooling"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerId\": \"64389df45e5df419f2d92ee5\",\n  \"sellerId\": \"6438709ef0714b0e3d4cea15\",\n  \"type\": \"Cooling\",\n  \"date\": \"2023-04-15T09:00:00Z\",\n  \"day\": \"Friday\",\n  \"time\": \"09:00 AM\",\n  \"image\": \"<base64-encoded-image-data>\",\n  \"amount\": 50.00,\n  \"customerLocation\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-122.4194, 37.7749]\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get orders by user id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/customerOrders/64389df45e5df419f2d92ee5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"customerOrders",
+						"64389df45e5df419f2d92ee5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/orders/6438b058d9e13688a2112dc6/cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"orders",
+						"6438b058d9e13688a2112dc6",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Order By seller",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/orders/6438b30ea89a966752cd4d77/cancell",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"orders",
+						"6438b30ea89a966752cd4d77",
+						"cancell"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order accepted by seller",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/orders/6438b7715bd0881ac60e8a28/accept",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"orders",
+						"6438b7715bd0881ac60e8a28",
+						"accept"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

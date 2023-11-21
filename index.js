@@ -69,6 +69,7 @@ mongoose
   .then(() => {
     console.log('Connected to MongoDB:');
 
+
   })
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
@@ -307,7 +308,7 @@ app.post("/signup", async (req, res) => {
   }
 
   // Hash the password before storing in the database
-   const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     const seller = new Seller({
@@ -356,7 +357,7 @@ app.post("/login", async (req, res) => {
       }
 
       // Compare the password provided with the hashed password stored in the database
-       const passwordMatch = await bcrypt.compare(password, seller.password);
+      const passwordMatch = await bcrypt.compare(password, seller.password);
 
       if (!passwordMatch) {
         return res.status(401).json({
@@ -798,7 +799,7 @@ app.post('/costumersignup', async (req, res) => {
   try {
 
     const existingUser = await User.findOne({ email: req.body.phonenumber });
-    if (existingUser ) {
+    if (existingUser) {
       return res.status(409).json({ message: 'User already exists' });
     }
 
@@ -825,40 +826,38 @@ app.post('/costumersignup', async (req, res) => {
   }
 });
 
-app.post('/costumersignin', async (req, res) => {
+app.post('/customersignin', async (req, res) => {
   try {
-    const email = req.body.phonenumber;
-    // Check if user exists
-    const user = await User.findOne({ phonenumber: req.body.phonenumber });
+    // Extract phone number and password from request body
+    const { phonenumber, password } = req.body;
+
+    // Find user by phone number
+    const user = await User.findOne({ phonenumber: phonenumber });
     if (!user) {
       return res.status(401).json({ message: 'User not found' });
     }
 
-    const user_ = await User.findOne({ email, token: { $ne: null } });
-    if (seller.access === "Accepted") {
-      if (user_) {
-        return res.status(400).json({ message: 'User is already logged in' });
-      }
-
-      // Check password
-      // const validPassword = await bcrypt.compare(req.body.password, user.password);
-      if (!validPassword) {
-        return res.status(401).json({ message: 'Invalid Password' });
-      }
-
-      // Create and return the JWT token
-      const token = jwt.sign({ userId: user._id }, 'mysecretkey');
-      user.token = token;
-      await user.save();
-      res.json({ message: 'Authentication successful', token: token, id: user._id });
-    } else {
-      return res.status(401).json({ message: 'Your Account is blocked you cannot login' });
+    // Check if the user account is blocked
+    if (user.access !== "Accepted") {
+      return res.status(401).json({ message: 'Your account is blocked. You cannot log in.' });
     }
+
+    // Check password validity
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+
+    // Create and return the JWT token
+    const token = jwt.sign({ userId: user._id },'mysecretkey', { expiresIn: '1h' });
+    res.json({ message: 'Authentication successful', token: token, id: user._id });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
 
 // Get customer info API
 app.get('/customer/:userId', async (req, res) => {

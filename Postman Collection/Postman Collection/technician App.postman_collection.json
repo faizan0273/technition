@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "4354b6c6-7211-4600-8308-eb03bd30ae20",
+		"name": "technician App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Seller SignUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstname\": \"inzmam\",\n  \"lastname\": \"khan\",\n  \"email\": \"abc@gmail.com\",\n  \"password\": \"password\",\n  \"phonenumber\": \"phonenumber\",\n  \"city\": \"lahrioe\",\n  \"dateofbirth\": \"dateofbirth\",\n  \"idofiqama\": \"asdasd\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order complete by seller",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/orders/6438b7715bd0881ac60e8a28/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"orders",
+						"6438b7715bd0881ac60e8a28",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update seller type",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\":\"Cooling\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/seller/6438709ef0714b0e3d4cea15/type",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"seller",
+						"6438709ef0714b0e3d4cea15",
+						"type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Seller Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\" : \"abc@gmail.com\",\n    \"password\" : \"12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update documents",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sellerId",
+							"value": "64385ad3a1907f00ec7329ca",
+							"type": "default"
+						},
+						{
+							"key": "passportDocument",
+							"type": "file",
+							"src": "/home/inzmam/Downloads/download.jpeg"
+						},
+						{
+							"key": "trainingDocument",
+							"type": "file",
+							"src": "/home/inzmam/Downloads/download.jpeg"
+						},
+						{
+							"key": "healthDocument",
+							"type": "file",
+							"src": "/home/inzmam/Downloads/download.jpeg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/seller/update-documents/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"seller",
+						"update-documents",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get seller Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDM4NzA5ZWYwNzE0YjBlM2Q0Y2VhMTUiLCJpYXQiOjE2ODE0MzMzNTF9.exQl2g9dcm0t5n1fyN8Iw8bG3XzTtNh7m0y_gPbiY4w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/seller/6438709ef0714b0e3d4cea15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"seller",
+						"6438709ef0714b0e3d4cea15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Seller",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"abc@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/updateseller/64385ad3a1907f00ec7329ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"updateseller",
+						"64385ad3a1907f00ec7329ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add amount to seller wallet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"seller\":\"64385ad3a1907f00ec7329ca\",\n    \"amount\":\"1000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/wallet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get seller amount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/wallet/64385ad3a1907f00ec7329ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"wallet",
+						"64385ad3a1907f00ec7329ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions of seller",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"seller\":\"64385ad3a1907f00ec7329ca\",\n    \"amount\":\"100\",\n    \"method\":\"bank\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/getransactions/64385ad3a1907f00ec7329ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"getransactions",
+						"64385ad3a1907f00ec7329ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "code send to email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"abc@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-passwordc/email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-passwordc",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"inzmamkhan56@gmail.com\",\n    \"code\":\"4997\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-passwordc/code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-passwordc",
+						"code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update new Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"abc@gmail.com\",\n    \"newPassword\":\"12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/forgot-passwordc/password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"forgot-passwordc",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/location/31.454633/74.300076",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"location",
+						"31.454633",
+						"74.300076"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Seller logout",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sellerId\":\"6438709ef0714b0e3d4cea15\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/seller/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"seller",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Seller new orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/sellerOrders/6438709ef0714b0e3d4cea15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"sellerOrders",
+						"6438709ef0714b0e3d4cea15"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
