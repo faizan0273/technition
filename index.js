@@ -5,7 +5,7 @@ const path = require('path');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const AWS = require('aws-sdk');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, 'uploads/'));
