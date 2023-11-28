@@ -350,12 +350,7 @@ app.post("/login", async (req, res) => {
     }
     if (seller.access === "Accepted") {
 
-
-      const user_ = await Seller.findOne({ phonenumber, token: { $ne: null } });
-      if (user_) {
-        return res.status(400).json({ message: 'User is already logged in' });
-      }
-
+      await Seller.findOne({ phonenumber});
       // Compare the password provided with the hashed password stored in the database
       const passwordMatch = await bcrypt.compare(password, seller.password);
 
@@ -568,7 +563,6 @@ app.get('/seller/:sellerId', async (req, res) => {
 // Logout API
 app.put('/seller/logout', async (req, res) => {
   const { sellerId } = req.body;
-  console.log(req.body);
   try {
     const seller = await Seller.findById(sellerId);
     console.log(req.body);
